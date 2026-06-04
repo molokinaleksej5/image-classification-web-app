@@ -1,0 +1,21 @@
+Classification report
+
+class                 precision     recall   f1-score    support
+--------------------------------------------------------------------
+buildings                0.9568     0.9087     0.9321       2191
+forest                   0.9925     0.9912     0.9918       2271
+glacier                  0.7943     0.8609     0.8263       1467
+mountain                 0.9011     0.8670     0.8837       2512
+sea                      0.9666     0.9556     0.9611       2274
+street                   0.9226     0.9656     0.9436       2382
+
+samples_count: 13097
+accuracy: 0.928151
+top_2_accuracy: 0.991677
+top_3_accuracy: 0.998015
+macro_precision: 0.922322
+macro_recall: 0.924842
+macro_f1_score: 0.923114
+weighted_precision: 0.929591
+weighted_recall: 0.928151
+weighted_f1_score: 0.928460

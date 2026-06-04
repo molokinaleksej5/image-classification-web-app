@@ -1,0 +1,11 @@
+﻿metric;value
+samples_count;13097
+accuracy;0.9281514850729174
+top_2_accuracy;0.9916774833931434
+top_3_accuracy;0.9980148125524929
+macro_precision;0.9223221540981252
+macro_recall;0.924841619796586
+macro_f1_score;0.9231138292223671
+weighted_precision;0.9295906206106056
+weighted_recall;0.9281514850729174
+weighted_f1_score;0.9284599204078934

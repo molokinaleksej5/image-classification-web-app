@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Intel Image AI System{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="bg-layer"></div>
+
+    <nav class="navbar">
+        <div class="logo">Intel Scene AI</div>
+        <div class="nav-links">
+            <a href="{{ url_for('index') }}">Главная</a>
+            <a href="{{ url_for('history') }}">История</a>
+            <a href="{{ url_for('stats') }}">Статистика</a>
+        </div>
+    </nav>
+
+    <main class="main-wrapper">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

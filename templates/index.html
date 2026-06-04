@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}Система классификации сцен{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-text">
+        <div class="badge">Intel Image Classification</div>
+        <h1>Интеллектуальная система классификации изображений природных сцен</h1>
+        <p>
+            Система предназначена для автоматического распознавания изображений датасета Intel Image Classification.
+            Пользователь может загрузить фотографию, после чего нейронная сеть определяет один из шести классов:
+            здания, лес, ледник, горы, море или улица.
+        </p>
+
+        <div class="hero-stats">
+            <div class="mini-card">
+                <span>Всего распознаваний</span>
+                <strong>{{ total_predictions }}</strong>
+            </div>
+            <div class="mini-card">
+                <span>Количество классов</span>
+                <strong>6</strong>
+            </div>
+            <div class="mini-card">
+                <span>Модель</span>
+                <strong>MobileNetV2</strong>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="grid-2">
+    <div class="panel glass">
+        <h2>Загрузка изображения</h2>
+        <form id="upload-form" enctype="multipart/form-data">
+            <label for="image-input" id="drop-zone" class="drop-zone">
+                <input type="file" id="image-input" name="image" accept="image/*" hidden>
+                <div class="drop-content">
+                    <div class="drop-icon">⬆</div>
+                    <h3>Перетащите изображение</h3>
+                    <p>или нажмите, чтобы выбрать файл с компьютера</p>
+                </div>
+            </label>
+            <button type="submit" class="btn-primary">Выполнить классификацию</button>
+        </form>
+        <div id="status-message" class="status-message"></div>
+    </div>
+
+    <div class="panel glass">
+        <h2>Предпросмотр</h2>
+        <div class="preview-box">
+            <img id="preview-image" class="hidden" src="" alt="Preview">
+            <div id="preview-placeholder" class="placeholder">
+                Предпросмотр изображения появится здесь
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="result-section" class="panel glass hidden">
+    <div class="section-head">
+        <h2>Результат классификации</h2>
+        <div class="live-dot"></div>
+    </div>
+
+    <div class="result-layout">
+        <div class="result-image-card">
+            <img id="result-image" src="" alt="Result">
+        </div>
+
+        <div class="result-info-card">
+            <div class="info-box">
+                <span>Определённый класс</span>
+                <h3 id="predicted-class">—</h3>
+            </div>
+            <div class="info-box">
+                <span>Уверенность модели</span>
+                <h3 id="confidence">—</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="probabilities-wrap">
+        <h3>Вероятности по классам</h3>
+        <div id="probabilities-list"></div>
+    </div>
+</section>
+
+<section class="panel glass">
+    <div class="section-head">
+        <h2>Последние распознавания</h2>
+    </div>
+
+    <div class="history-grid">
+        {% for item in recent_items %}
+            <div class="history-card">
+                <img src="{{ url_for('static', filename='uploads/' + item.filename) }}" alt="">
+                <div class="history-body">
+                    <h4>{{ item.predicted_class }}</h4>
+                    <p>Уверенность: {{ item.confidence }}%</p>
+                    <span>{{ item.created_at.strftime('%d.%m.%Y %H:%M') }}</span>
+                </div>
+            </div>
+        {% else %}
+            <div class="empty-note">История пока пуста</div>
+        {% endfor %}
+    </div>
+</section>
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+{% endblock %}
